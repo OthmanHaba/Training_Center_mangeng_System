@@ -5,11 +5,14 @@
         <template #header>
             Dashboard
         </template>
-
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 border-b border-gray-200">
-                You're logged in!
+                this is a card
             </div>
+        </div>
+        <div class="grid grid-cols-3 gap-4">
+            <DashboardCard :title="'Total Trainees'" :count="48"/>
+            <DashboardCard :title="'Total Courses'" :count="3"/>
         </div>
     </AuthenticatedLayout>
 </template>
@@ -17,4 +20,5 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
 import { Head } from '@inertiajs/vue3';
+import DashboardCard from "@/Components/DashboardCard.vue";
 </script>
