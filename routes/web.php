@@ -40,6 +40,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('trainee', [TraineeController::class, 'index'])->name('trainee.index');
     Route::get('trainee/create', [TraineeController::class, 'create'])->name('trainee.create');
+    Route::post('trainee/store', [TraineeController::class, 'store'])->name('trainee.store');
 
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
