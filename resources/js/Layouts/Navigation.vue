@@ -37,44 +37,39 @@
                 Users
             </nav-link>
 
-            <a class="flex items-center mt-4 py-2 px-6 text-gray-100" href="#" @click="showingTwoLevelMenu = !showingTwoLevelMenu">
-                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z"></path>
-                </svg>
-                <span class="mx-3">Trainees</span>
-            </a>
-            <transition
-                enter-to-class="transition-all duration-300 ease-in-out"
-                enter-from-class="max-h-0 opacity-25"
-                leave-from-class="opacity-100 max-h-xl"
-                leave-to-class="max-h-0 opacity-0">
-                <div v-show="showingTwoLevelMenu">
-                    <ul class="overflow-hidden p-2 mx-4 mt-2 space-y-2 text-sm font-medium text-white bg-gray-700 bg-opacity-50 rounded-md shadow-inner"
-                        aria-label="submenu">
-                        <li class="px-2 py-1 transition-colors duration-150">
-                            <Link class="w-full" :href="route('trainee.create')">Add Trainee</Link>
-                        </li>
-                        <li class="px-2 py-1 transition-colors duration-150">
-                            <Link class="w-full" :href="route('trainee.index')">All Trainees</Link>
-                        </li>
-                    </ul>
-                </div>
-            </transition>
-
-            <!--trainees -->
-
-            <nav-link :href="route('trainee.index')" :active="route().current('trainee.index')">
-                <template #icon>
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
-                    </svg>
-                </template>
-                Trainees
-            </nav-link>
-
+            <!--            <a class="flex items-center mt-4 py-2 px-6 text-gray-100" href="#" @click="showingTwoLevelMenu = !showingTwoLevelMenu">-->
+            <!--                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">-->
+            <!--                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"-->
+            <!--                          d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z"></path>-->
+            <!--                </svg>-->
+            <!--                <span class="mx-3">Trainees</span>-->
+            <!--            </a>-->
+            <!--            <transition-->
+            <!--                enter-to-class="transition-all duration-300 ease-in-out"-->
+            <!--                enter-from-class="max-h-0 opacity-25"-->
+            <!--                leave-from-class="opacity-100 max-h-xl"-->
+            <!--                leave-to-class="max-h-0 opacity-0">-->
+            <!--                <div v-show="showingTwoLevelMenu">-->
+            <!--                    <ul class="overflow-hidden p-2 mx-4 mt-2 space-y-2 text-sm font-medium text-white bg-gray-700 bg-opacity-50 rounded-md shadow-inner"-->
+            <!--                        aria-label="submenu">-->
+            <!--                        <li class="px-2 py-1 transition-colors duration-150">-->
+            <!--                            <Link class="w-full" :href="route('trainee.create')">Add Trainee</Link>-->
+            <!--                        </li>-->
+            <!--                        <li class="px-2 py-1 transition-colors duration-150">-->
+            <!--                            <Link class="w-full" :href="route('trainee.index')">All Trainees</Link>-->
+            <!--                        </li>-->
+            <!--                    </ul>-->
+            <!--                </div>-->
+            <!--            </transition>-->
+            <NavegationDropDownItem
+                :inner-text="'Trinee'"
+                :items="traineeItems"
+            />
+            <NavegationDropDownItem
+                :inner-text="'Course'"
+                :items="courseItems"
+            />
+            <!--about -->
             <nav-link :href="route('about')" :active="route().current('about')">
                 <template #icon>
                     <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
@@ -83,7 +78,7 @@
                             d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
                     </svg>
                 </template>
-                About us
+                Courses
             </nav-link>
         </nav>
     </div>
@@ -92,21 +87,34 @@
 
 <script>
 import NavLink from '@/Components/NavLink.vue';
-import { Link } from '@inertiajs/vue3';
-import { ref } from 'vue'
+import {Link} from '@inertiajs/vue3';
+import {ref} from 'vue'
+import NavegationDropDownItem from "@/Components/NavegationDropDownItem.vue";
+
 
 export default {
     components: {
+        NavegationDropDownItem,
         NavLink,
         Link,
     },
 
     setup() {
         let showingTwoLevelMenu = ref(false)
+        let traineeItems = [
+            {text: 'Add trainee', route: 'trainee.create'},
+            {text: 'All trainees', route: 'trainee.index'}
+        ];
+        let courseItems = [
+            // {text: 'Add Course', route: 'course.create'},
+        ]
 
         return {
             showingTwoLevelMenu
+            ,traineeItems
+            ,courseItems
         }
+
     },
 }
 </script>
@@ -114,3 +122,5 @@ export default {
 <style scoped>
 
 </style>
+
+

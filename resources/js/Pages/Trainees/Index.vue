@@ -3,6 +3,19 @@ import {Head, router} from "@inertiajs/vue3";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import {Link} from "@inertiajs/vue3";
 import DashboardCard from "@/Components/DashboardCard.vue";
+import {ref} from "vue";
+import model from "@/Components/Model.vue";
+let isModalVisible = ref(false);
+
+
+let showModal = () => {
+    isModalVisible = true;
+};
+let closeModal = () => {
+    isModalVisible = false;
+};
+
+
 
 let props = defineProps({
     trainees: Object,
@@ -26,9 +39,13 @@ let props = defineProps({
                     </div>
                 </div>
                 <div class="mt-2 mx-4 ">
-                    <button class="  bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-xl">
-                        Add a Trainee
-                    </button>
+                    <div class="flex">
+                        <button class="  bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-xl">
+                            Add a Trainee
+                        </button>
+                        <button @click="showModal" class="bg-blue-500 text-white px-4 py-2">Open Modal</button>
+                        <Model v-if="isModalVisible" @close="closeModal"/>
+                    </div>
                 </div>
             </div>
 
@@ -72,8 +89,9 @@ let props = defineProps({
                     </tbody>
                 </table>
             </div>
-
         </div>
+
+
     </AuthenticatedLayout>
 </template>
 
