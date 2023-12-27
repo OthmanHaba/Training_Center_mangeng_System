@@ -26,7 +26,7 @@ class TraineeController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users',
             'phone' => 'required|numeric',
             'name' => 'required',
         ]);
@@ -44,6 +44,16 @@ class TraineeController extends Controller
                 'currentCourse' => '',
                 'user_id' => $traineeAcoutn->id]);
         });
-        return redirect()->back()->with('flash', 'sucsses');
+//        session()->flash('success', 'Item added successfully.');
+        return redirect()->back()->with('success', 'Item added successfully.');
+    }
+
+    public function show($id)
+    {
+
+       $trainee =  Trainee::find($id);
+       return Inertia::render('Trainees/show',[
+           'trainee' => $trainee
+       ]);
     }
 }

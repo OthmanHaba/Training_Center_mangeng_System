@@ -1,4 +1,5 @@
 <template>
+    <FlashMessage />
     <div class="flex h-screen bg-gray-200 font-roboto">
         <Navigation />
 
@@ -16,9 +17,11 @@
             </main>
         </div>
     </div>
+
 </template>
 
 <script setup>
 import Header from '@/Layouts/Header.vue';
 import Navigation from '@/Layouts/Navigation.vue';
+import FlashMessage from "@/Components/FlashMessage.vue";
 </script>

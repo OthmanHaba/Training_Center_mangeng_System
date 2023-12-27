@@ -3,6 +3,7 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import {Head} from "@inertiajs/vue3";
 import {useForm} from "@inertiajs/vue3";
+// import Alert from "@/Components/Alert/Alert.vue";
 
 let form = useForm({
     name: '',

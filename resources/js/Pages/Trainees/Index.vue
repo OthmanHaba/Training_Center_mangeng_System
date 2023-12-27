@@ -1,7 +1,9 @@
 <script setup>
-import {Head} from "@inertiajs/vue3";
+import {Head, router} from "@inertiajs/vue3";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+import {Link} from "@inertiajs/vue3";
 import DashboardCard from "@/Components/DashboardCard.vue";
+
 let props = defineProps({
     trainees: Object,
 });
@@ -61,9 +63,9 @@ let props = defineProps({
                             {{ trainee.grade }}
                         </td>
                         <td class="px-6 py-4 text-right">
-                            <a href="#" class="mx-1  font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                            <a href="#" class="mx-1 font-medium text-blue-600 dark:text-blue-500 hover:underline">Show</a>
-                            <a href="#" class="mx-1 font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</a>
+                            <Link :href="route('trainee.show',trainee.id)" class="mx-1  font-medium text-blue-600 dark:text-blue-500 hover:underline">Show</Link>
+                            <Link href="#" class="mx-1 font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</Link>
+                            <Link href="#" class="mx-1 font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</Link>
                         </td>
                     </tr>
 
