@@ -13,6 +13,7 @@
         "axios": "^1.6.1",
         "laravel-vite-plugin": "^1.0.0",
         "postcss": "^8.4.31",
+        "sass": "^1.69.6",
         "tailwindcss": "^3.2.1",
         "vite": "^5.0.0",
         "vue": "^3.2.41"
@@ -21,6 +22,8 @@
         "@inertiajs/vue3": "^1.0.14",
         "@vitejs/plugin-vue": "^4.5.2",
         "vue": "^3.3.13",
+        "vue-material-design-icons": "^5.2.0",
+        "vue3-click-away": "^1.2.4",
         "vuetify": "^3.4.8"
     }
 }
