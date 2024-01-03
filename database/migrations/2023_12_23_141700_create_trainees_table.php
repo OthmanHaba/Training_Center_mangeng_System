@@ -14,10 +14,24 @@ return new class extends Migration
         Schema::create('trainees', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('phone');
-            $table->unsignedDouble('grade');
-            $table->string('currentCourse');
-            $table->foreignId('user_id');
+            $table->date('berthDate');
+            $table->string('EducationalLevel');
+            $table->string('phoneNumber');
+            $table->string('email')->unique();
+            $table->date('startDate');
+            $table->string('UniqeSahapMAil');
+            $table->enum('states',[
+                'approved',
+                'registered',
+                'approved_lated',
+                'denied',
+                'graduated',
+                'graduated_feeble',
+                'feeble',
+                'Suspended',
+            ]);
+            $table->date('endDate');
+            $table->string('note');
             $table->timestamps();
         });
     }

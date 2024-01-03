@@ -1,5 +1,7 @@
 <template>
-    <Link :href="href" :class="classes">
+    <Link :href="href" :class="classes"
+        class="flex justify-between"
+    >
         <slot name="icon" />
         <span class="mx-3">
             <slot />

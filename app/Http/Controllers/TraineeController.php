@@ -13,7 +13,7 @@ class TraineeController extends Controller
 {
     public function index()
     {
-        $trainees = Trainee::all(['id','name','grade','phone']);
+        $trainees = Trainee::all();
         return Inertia::render('Trainees/Index', [
             'trainees' => $trainees
         ]);
@@ -25,27 +25,27 @@ class TraineeController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'email' => 'required|email|unique:users',
-            'phone' => 'required|numeric',
-            'name' => 'required',
-        ]);
-        DB::transaction(function() use ($request){
-             $traineeAcoutn =  User::create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => Hash::make('123456'),
-            ]);
-
-            Trainee::create([
-                'name' => $request->name,
-                'phone' => $request->phone,
-                'grade' => 0,
-                'currentCourse' => '',
-                'user_id' => $traineeAcoutn->id]);
-        });
-//        session()->flash('success', 'Item added successfully.');
-        return redirect()->back()->with('success', 'Item added successfully.');
+//        $request->validate([
+//            'email' => 'required|email|unique:users',
+//            'phone' => 'required|numeric',
+//            'name' => 'required',
+//        ]);
+//        DB::transaction(function() use ($request){
+//             $traineeAcoutn =  User::create([
+//                'name' => $request->name,
+//                'email' => $request->email,
+//                'password' => Hash::make('123456'),
+//            ]);
+//
+//            Trainee::create([
+//                'name' => $request->name,
+//                'phone' => $request->phone,
+//                'grade' => 0,
+//                'currentCourse' => '',
+//                'user_id' => $traineeAcoutn->id]);
+//        });
+////        session()->flash('success', 'Item added successfully.');
+//        return redirect()->back()->with('success', 'Item added successfully.');
     }
 
     public function show($id)

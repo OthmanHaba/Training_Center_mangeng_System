@@ -19,7 +19,7 @@
                  :class="[widthClass, alignmentClasses]"
                  style="display: none;"
                  @click="open = false">
-                <div class="absolute right-0 z-10 mt-2 w-48 overflow-hidden rounded-md bg-white shadow-xl">
+                <div class="absolute left-0 z-10 mt-2 w-48 overflow-hidden rounded-md bg-white shadow-xl">
                     <slot name="content" />
                 </div>
             </div>
@@ -32,7 +32,7 @@ import { computed, onMounted, onUnmounted, ref } from 'vue';
 
 const props = defineProps({
     align: {
-        default: 'right'
+        default: 'left'
     },
     width: {
         default: '48'

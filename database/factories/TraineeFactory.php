@@ -19,14 +19,25 @@ class TraineeFactory extends Factory
      */
     public function definition(): array
     {
-        $name= $this->faker->name;
         return [
-            'name' => $name,
-            'phone' => $this->faker->phoneNumber,
-            'grade' => 50,
-            'currentCourse' => $this->faker->company,
-            'user_id' => User::factory()->create(['name' => $name])
-
+            'name' => $this->faker->name,
+            'berthDate' => $this->faker->date,
+            'EducationalLevel' => 'graduated',
+            'phoneNumber' => $this->faker->phoneNumber,
+            'email' => $this->faker->unique()->safeEmail,
+            'startDate' => $this->faker->date,
+            'UniqeSahapMAil' => $this->faker->unique()->companyEmail,
+            'states' => $this->faker->randomElement(['approved',
+                'registered',
+                'approved_lated',
+                'denied',
+                'graduated',
+                'graduated_feeble',
+                'feeble',
+                'Suspended',
+                ]),
+            'endDate' => $this->faker->date,
+            'note' => $this->faker->paragraph,
         ];
     }
 }

@@ -1,8 +1,6 @@
 <template>
-    <v-app>
         <FlashMessage/>
         <div class="flex h-screen bg-gray-200 font-roboto">
-            <Navigation/>
 
             <div class="flex flex-1 flex-col overflow-hidden">
                 <Header/>
@@ -12,13 +10,13 @@
                         <h3 class="mb-4 text-3xl font-medium text-gray-700">
                             <slot name="header"/>
                         </h3>
-
                         <slot/>
                     </div>
                 </main>
             </div>
+            <Navigation />
+
         </div>
-    </v-app>
 </template>
 
 <script setup>

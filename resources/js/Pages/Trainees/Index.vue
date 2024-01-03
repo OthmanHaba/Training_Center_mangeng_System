@@ -5,6 +5,7 @@ import {Link} from "@inertiajs/vue3";
 import {ref} from "vue";
 import Drawer from "@/Components/Drawer.vue";
 import CloseBoxIcon from "vue-material-design-icons/CloseBox.vue"
+import ViewListIcon from 'vue-material-design-icons/ViewList.vue'
 
 
 const isDrawerOpen = ref(false);
@@ -89,13 +90,22 @@ let submit = () => {
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" class="px-6 py-3">
-                            Trainee name
+                            اسم المتدرب
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            phone number
+                            تاريخ الميلاد
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            grade
+                            المستوى التعليمي
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            رقم الهاتف
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            تاريخ الانضمام
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            الحالة
                         </th>
                         <th scope="col" class="px-6 py-3">
                             <span class="sr-only">Edit</span>
@@ -108,13 +118,25 @@ let submit = () => {
                             {{ trainee.name }}
                         </th>
                         <td class="px-6 py-4">
-                            {{ trainee.phone }}
+                            {{ trainee.berthDate}}
                         </td>
                         <td class="px-6 py-4">
-                            {{ trainee.grade }}
+                            {{ trainee.EducationalLevel }}
                         </td>
-                        <td class="px-6 py-4 text-right">
-                            <Link :href="route('trainee.show',trainee.id)" class="mx-1  font-medium text-blue-600 dark:text-blue-500 hover:underline">Show</Link>
+                        <td class="px-6 py-4">
+                            {{ trainee.phoneNumber }}
+                        </td>
+
+                        <td class="px-6 py-4">
+                            {{ trainee.startDate }}
+                        </td>
+
+                        <td class="px-6 py-4">
+                            {{ trainee.states }}
+                        </td>
+
+                        <td class="px-6 py-2 text-right">
+                            <Link :href="route('trainee.show',trainee.id)" class=""><ViewListIcon/></Link>
                             <Link href="#" class="mx-1 font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</Link>
                             <Link href="#" class="mx-1 font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</Link>
                         </td>

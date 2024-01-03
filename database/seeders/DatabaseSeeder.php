@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
              'name' => 'othman',
              'email' => 'oth@oth.com',
          ]);
-        Trainee::factory(15)->create();
+        Trainee::factory(3)->create();
 
     }
 }
