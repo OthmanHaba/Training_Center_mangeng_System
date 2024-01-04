@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->date('berthDate');
-            $table->string('EducationalLevel');
-            $table->string('phoneNumber');
+            $table->string('EducationalLevel')->nullable();
+            $table->string('phoneNumber')->nullable();
             $table->string('email')->unique();
             $table->date('startDate');
             $table->string('UniqeSahapMAil');

@@ -5,8 +5,8 @@ import {Link} from "@inertiajs/vue3";
 import {ref} from "vue";
 import Drawer from "@/Components/Drawer.vue";
 import CloseBoxIcon from "vue-material-design-icons/CloseBox.vue"
-import ViewListIcon from 'vue-material-design-icons/ViewList.vue'
-
+import EyeIcon from 'vue-material-design-icons/Eye.vue'
+import AccountEditIcon from 'vue-material-design-icons/AccountEdit.vue'
 
 const isDrawerOpen = ref(false);
 const toggleDrawer = () => {
@@ -22,71 +22,170 @@ const props = defineProps({
 
 let form = useForm({
     name: '',
+    berthDate: '',
+    educationalLevel: '',
+    phoneNumber: '',
     email: '',
-    phone: '',
+    startDate: '',
+    uniqueSahapMail: '',
+    states: '',
+    endDate: '',
+    note: '',
 });
 let submit = () => {
     // console.log(form);
     form.post(route('trainee.store'));
 };
+let itemStat = (state, arr) => {
+    return {[state]: arr};
+};
+
+let statues = [
+    'approved',
+    'registered',
+    'approved_lated',
+    'denied',
+    'graduated',
+    'graduated_feeble',
+    'feeble',
+    'Suspended',
+];
+
+const state = (state) => {
+    switch (state) {
+        case 'approved':
+            return 'مقبول';
+        case 'registered':
+            return 'مسجل';
+        case 'approved_lated':
+            return 'مقبول متأخر';
+        case 'denied':
+            return 'مرفوض';
+        case 'graduated':
+            return 'متخرج';
+        case 'graduated_feeble':
+            return 'متخرج متعثر';
+        case 'feeble':
+            return 'متعثر';
+        case 'suspended':
+            return 'موقوف';
+        default:
+            return 'لم يسجل الحالة';
+    }
+}
 </script>
 
 <template>
-    <Head title="Trainees" />
+    <Head title="المتدربين"/>
 
     <AuthenticatedLayout>
         <template #header>
-            Trainees
+            <h1 dir="rtl">قائمة المتدربين</h1>
         </template>
 
-        <div>
+        <div dir="rtl">
             <div class="mb-4 inline-flex w-full overflow-hidden rounded-lg bg-white shadow-md justify-between">
                 <div class="-mx-3 px-4 py-2">
-                    <div class="mx-3">
-                        <span class="font-semibold text-blue-500">Info</span>
-                        <p class="text-sm text-gray-600">Sample table page</p>
-                    </div>
+
                 </div>
                 <div class="mt-2 mx-4 ">
                     <Drawer :is-open="isDrawerOpen" :speed="500" :max-width="'600px'" @close="closeDrawer">
                         <button @click="closeDrawer">
                             <close-box-icon/>
                         </button>
-                        <form @submit.prevent="submit" class="ml-2 py-2 px-2 ">
-                            <!-- Left Side -->
-                            <div>
-                                <div class="mb-4">
-                                    <label for="name" class="block text-gray-600 text-sm font-medium mb-2">Name</label>
-                                    <input type="text" v-model="form.name" id="name" name="name" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500" placeholder="John Doe" required>
-                                </div>
+                        <div class="flex justify-center items-center h-screen">
+                            <div dir="rtl" class="bg-blue-100 p-8 rounded-lg shadow-md w-full  ">
+                                <h2 class="text-2xl font-semibold mb-6 text-right">إضافة متدرب جديد</h2>
 
-                                <div class="mb-4">
-                                    <label for="phone" class="block text-gray-600 text-sm font-medium mb-2">Phone Number</label>
-                                    <input type="tel" v-model="form.phone" id="phone"  name="phone" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500" placeholder="555-555-5555" required>
-                                </div>
-                                <div v-if="form.errors.phone" v-text="form.errors.phone" class="text-red-500 text-xs mt-1"></div>
+                                <form @submit.prevent="submit" class="grid grid-cols-2 gap-3">
+                                    <div class="mb-4">
+                                        <label for="name" class="block text-sm font-medium text-gray-600">الاسم</label>
+                                        <input v-model="form.name" type="text" id="name" name="name"
+                                               class="input-field">
+                                    </div>
 
-                                <div class="mb-4">
-                                    <label for="email" class="block text-gray-600 text-sm font-medium mb-2">Email</label>
-                                    <input type="email" id="email" v-model="form.email" name="email" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500" placeholder="john.doe@example.com" required>
-                                </div>
-                                <div v-if="form.errors.phone" v-text="form.errors.phone" class="text-red-500 text-xs mt-1"></div>
+                                    <div class="mb-4">
+                                        <label for="berthDate" class="block text-sm font-medium text-gray-600">تاريخ
+                                            الميلاد</label>
+                                        <input v-model="form.berthDate" type="date" id="berthDate" name="berthDate"
+                                               class="input-field">
+                                    </div>
 
-                                <div class="mt-0">
-                                    <button  type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800">
-                                        Submit
-                                    </button>
-                                </div>
+                                    <div class="mb-4">
+                                        <label for="educationalLevel" class="block text-sm font-medium text-gray-600">المستوى
+                                            التعليمي</label>
+                                        <input v-model="form.educationalLevel" type="text" id="educationalLevel"
+                                               name="educationalLevel" class="input-field">
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label for="phoneNumber" class="block text-sm font-medium text-gray-600">رقم
+                                            الهاتف</label>
+                                        <input v-model="form.phoneNumber" type="text" id="phoneNumber"
+                                               name="phoneNumber" class="input-field">
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label for="email" class="block text-sm font-medium text-gray-600">البريد
+                                            الإلكتروني</label>
+                                        <input v-model="form.email" type="email" id="email" name="email"
+                                               class="input-field">
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label for="startDate" class="block text-sm font-medium text-gray-600">تاريخ
+                                            البداية</label>
+                                        <input v-model="form.startDate" type="date" id="startDate" name="startDate"
+                                               class="input-field">
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label for="uniqueSahapMail" class="block text-sm font-medium text-gray-600">بريد
+                                            شركة سحاب</label>
+                                        <input v-model="form.uniqueSahapMail" type="text" id="uniqueSahapMail"
+                                               name="uniqueSahapMail" class="input-field">
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label for="states"
+                                               class="block text-sm font-medium text-gray-600">الحالة</label>
+                                        <select v-model="form.states" id="states" name="states"
+                                                class="bg-white text-center input-field">
+                                            <option value="approved">تم الموافقة</option>
+                                            <option value="registered">تم التسجيل</option>
+                                            <option value="approved_lated">تم الموافقة لاكن يؤجل</option>
+                                            <option value="denied">تم الرفض</option>
+                                            <option value="graduated">تم التخرج</option>
+                                            <option value="graduated_feeble">تخرج بضعف</option>
+                                            <option value="feeble">ضعيف</option>
+                                            <option value="Suspended">معلق</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-span-2 mb-6">
+                                        <label for="note"
+                                               class="block text-sm font-medium text-gray-600">ملاحظات</label>
+                                        <textarea v-model="form.note" id="note" name="note" rows="4"
+                                                  class="bg-white input-field"></textarea>
+                                    </div>
+
+                                    <div class="col-span-2 flex justify-center">
+                                        <button type="submit" class="btn-submit">إرسال</button>
+                                    </div>
+                                </form>
                             </div>
-                        </form>
+                        </div>
                     </Drawer>
-                    <button class="border bg-blue-300 mx-4 my-2 p-2 rounded-sm cursor-pointer hover:bg-blue-400 text-center" @click="toggleDrawer">Add Trainee</button>
+                    <button
+                        class="border bg-blue-300 mx-4 my-2 p-2 rounded-sm cursor-pointer hover:bg-blue-400 text-center "
+                        @click="toggleDrawer">اضافة متدرب
+                    </button>
                 </div>
             </div>
 
 
             <div class="mt-6 relative overflow-x-auto shadow-md sm:rounded-lg">
-                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <table dir="rtl" class=" w-full text-sm text-right rtl:text-right text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" class="px-6 py-3">
@@ -114,11 +213,11 @@ let submit = () => {
                     </thead>
                     <tbody v-for="trainee in trainees">
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                             {{ trainee.name }}
                         </th>
                         <td class="px-6 py-4">
-                            {{ trainee.berthDate}}
+                            {{ trainee.berthDate }}
                         </td>
                         <td class="px-6 py-4">
                             {{ trainee.EducationalLevel }}
@@ -132,13 +231,22 @@ let submit = () => {
                         </td>
 
                         <td class="px-6 py-4">
-                            {{ trainee.states }}
+                            <span :class="itemStat(trainee.states,statues)"
+                                  class="whitespace-nowrap">{{ state(trainee.states) }}</span>
                         </td>
 
                         <td class="px-6 py-2 text-right">
-                            <Link :href="route('trainee.show',trainee.id)" class=""><ViewListIcon/></Link>
-                            <Link href="#" class="mx-1 font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</Link>
-                            <Link href="#" class="mx-1 font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</Link>
+                            <div class="flex gap-[10px]">
+                                <Link :href="route('trainee.show',trainee.id)" class="text-blue-600  p-1">
+                                    <EyeIcon/>
+                                </Link>
+                                <Link href="#" class="text-blue-600">
+                                    <AccountEditIcon/>
+                                </Link>
+                                <Link href="#" class="">
+
+                                </Link>
+                            </div>
                         </td>
                     </tr>
 
@@ -147,10 +255,63 @@ let submit = () => {
             </div>
         </div>
 
+        <div dir="rtl" class=" mt-10 border bg-sky-200 h-[200px] w-4/6">
+            <header class="text-black px-4 py-6 font-extrabold ">
+                <p>اسم المتدرب : </p>
+                <p> المستوى التعليمي: </p>
+            </header>
+            <main class="px-4 text-sm ">
+                رقم الهاتف
+            </main>
+            <footer>
+                
+            </footer>
+        </div>
+
 
     </AuthenticatedLayout>
 </template>
 
 <style scoped>
 
+.approved {
+    @apply bg-green-600 text-white rounded-xl px-2 py-1;
+}
+
+.registered {
+    @apply bg-blue-500 text-white rounded-xl px-2 py-1;
+}
+
+.approved_lated {
+    @apply bg-yellow-500 text-white rounded-xl px-2 py-1;
+}
+
+.denied {
+    @apply bg-red-600 text-white rounded-xl px-2 py-1;
+}
+
+.graduated {
+    @apply bg-purple-700 text-white rounded-xl px-2 py-1;
+}
+
+.graduated_feeble {
+    @apply bg-purple-400 text-white rounded-xl px-2 py-1;
+}
+
+.feeble {
+    @apply bg-gray-300 text-gray-800 rounded-xl px-2 py-1;
+}
+
+.Suspended {
+    @apply bg-red-800 text-white rounded-xl px-2 py-1;
+}
+
+
+.input-field {
+    @apply mt-1 p-2 border rounded-md w-full focus:outline-none focus:ring focus:border-blue-300
+}
+
+.btn-submit {
+    @apply px-6 py-2 bg-blue-500 text-white rounded-md cursor-pointer
+}
 </style>
