@@ -13,25 +13,6 @@ class TraineeController extends Controller
 {
     public function index()
     {
-        /*$table->string('name');
-        $table->date('berthDate');
-        $table->string('EducationalLevel');
-        $table->string('phoneNumber');
-        $table->string('email')->unique();
-        $table->date('startDate');
-        $table->string('UniqeSahapMAil');
-        $table->enum('states',[
-            'approved',
-            'registered',
-            'approved_lated',
-            'denied',
-            'graduated',
-            'graduated_feeble',
-            'feeble',
-            'Suspended',
-        ]);
-        $table->date('endDate');
-        $table->string('note');*/
         $trainees = Trainee::all([
             'name',
             'berthDate',

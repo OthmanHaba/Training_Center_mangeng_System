@@ -15,7 +15,6 @@
                 </main>
             </div>
             <Navigation />
-
         </div>
 </template>
 

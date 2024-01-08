@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\TraineeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
@@ -42,6 +43,9 @@ Route::middleware('auth')->group(function () {
     Route::get('trainee/create', [TraineeController::class, 'create'])->name('trainee.create');
     Route::post('trainee/store', [TraineeController::class, 'store'])->name('trainee.store');
     Route::get('trainee/{:id}', [TraineeController::class, 'show'])->name('trainee.show');
+
+    Route::get('programs', [ProgramController::class, 'index'])->name('program.index');
+    Route::get('program/create', [ProgramController::class, 'create'])->name('program.create');
 
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

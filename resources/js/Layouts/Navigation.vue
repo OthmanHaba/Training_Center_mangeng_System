@@ -6,13 +6,6 @@
          class="overflow-y-auto fixed inset-y-0 right-0 z-30 w-64 bg-gray-900 transition duration-300 transform lg:translate-x-0 lg:static lg:inset-0">
 
         <!--icon -->
-<!--        <div class="flex justify-center items-center mt-8">-->
-<!--            <div class="flex items-center">-->
-<!--                <img src="/shp.png" alt="sahap camp" class="h-16 w-16">-->
-
-<!--                <span class="mx-2 text-2xl font-semibold text-white">SahapCamp</span>-->
-<!--            </div>-->
-<!--        </div>-->
         <ApplicationLogo :class="'text-white'"/>
 
         <!--side items-->
@@ -81,7 +74,8 @@ export default {
             {text: 'عرض المتدربين', route: 'trainee.index'}
         ];
         let courseItems = [
-            // {text: 'Add Course', route: 'course.create'},
+            {text: 'اضافة برنامج تدريبي', route: 'program.create'},
+            {text: 'عرض البرامج التدريبة', route: 'program.index'},
         ]
 
         return {
