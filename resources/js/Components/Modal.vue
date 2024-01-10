@@ -28,7 +28,6 @@ watch(
         }
     }
 );
-
 const close = () => {
     if (props.closeable) {
         emit('close');

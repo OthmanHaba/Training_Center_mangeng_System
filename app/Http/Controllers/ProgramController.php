@@ -2,20 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Program;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Psy\Util\Json;
+use function Termwind\renderUsing;
 
 class ProgramController extends Controller
 {
-    public function index()
+    public function  index()
     {
-        return Inertia::render('Programs/Index');
+        //return Program::with('category:name')->get();
+        return Inertia::render('Programs/Index',[
+            'programs' => Program::with('category')->get(),
+        ]);
     }
 
     public function create()
     {
-        return Inertia::render('Programs/create');
+        $category = Category::all();
+        //return  $category;
+        return Inertia::render('Programs/create',[
+            'categories' => $category,
+        ]);
     }
 
     /**
@@ -23,7 +33,30 @@ class ProgramController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return $request;
+    }
+
+    public function storeCategory(Request $request)
+    {
+        $request->validate([
+            'name' => 'required'
+        ]);
+        $category = Category::create([
+            'name' => $request->name
+        ]);
+        return response()->json($category,201);
+    }
+
+    public function deleteCategory($id)
+    {
+        $record = Category::find($id);
+        if (!$record) {
+            return response()->json(['message' => 'Record not found.'], 404) ;
+        }
+
+        $record->delete();
+
+        return response()->json(['message' => 'Record deleted successfully.']);
     }
 
     /**

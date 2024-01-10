@@ -4,19 +4,17 @@
 
     <div :class="$page.props.showingMobileMenu ? 'translate-x-0 ease-out' : 'translate-x-full ease-in'"
          class="overflow-y-auto fixed inset-y-0 right-0 z-30 w-64 bg-gray-900 transition duration-300 transform lg:translate-x-0 lg:static lg:inset-0">
-
-        <!--icon -->
         <ApplicationLogo :class="'text-white'"/>
 
         <!--side items-->
         <aside class="mt-10" x-data="{ isMultiLevelMenuOpen: false }">
-            <nav-link :href="route('dashboard')" :active="route().current('dashboard')">
+            <nav-link :href="route('dashboard')" >
                 <template #icon>
                     <ViewDashboardIcon/>
                 </template>
                 لوحة التحكم
             </nav-link>
-            <nav-link :href="route('users.index')" :active="route().current('users.index')" >
+            <nav-link :href="route('users.index')" >
                     <template #icon>
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                              xmlns="http://www.w3.org/2000/svg">
@@ -34,17 +32,6 @@
                 :inner-text="'البرامج التدريبية'"
                 :items="courseItems"
             />
-            <!--about -->
-            <nav-link :href="route('about')" :active="route().current('about')">
-                <template #icon>
-                    <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                         stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
-                        <path
-                            d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
-                    </svg>
-                </template>
-                الكورسات
-            </nav-link>
         </aside>
     </div>
 
@@ -68,6 +55,7 @@ export default {
     },
 
     setup() {
+
         let showingTwoLevelMenu = ref(false)
         let traineeItems = [
             {text: 'اضافة متدرب', route: 'trainee.create'},
@@ -83,6 +71,7 @@ export default {
             ,traineeItems
             ,courseItems
         }
+
 
     },
 }

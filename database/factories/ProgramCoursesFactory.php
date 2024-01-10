@@ -2,22 +2,20 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
+use App\Models\Program;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\ProgramCourses>
- */
 class ProgramCoursesFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
         return [
-            //
+            'program_id' => function () {
+                return Program::factory()->create()->id;
+            },
+            'title' => $this->faker->sentence,
+            'days_count' => $this->faker->numberBetween(1, 30),
         ];
     }
 }

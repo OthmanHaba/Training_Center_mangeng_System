@@ -32,7 +32,6 @@ let showingTwoLevelMenu = ref(false)
                 <li
                     v-for="item in items"
                     class="px-2 py-1 transition-colors duration-150 hover:bg-gray-800 rounded-l text-right  mt-1 p-1 border-r-4 hover:border-r-amber-700 hover:-translate-x-1 hover:transform ease-in-out"
-                    :class="route().current(item.route) ? ' border-r-amber-700 -translate-x-1 transform ease-in-out' : ''"
                 >
                     <Link class="w-full" :href="route(item.route)">{{ item.text }}</Link>
 

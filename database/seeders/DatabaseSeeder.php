@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Program;
 use App\Models\Trainee;
 use Illuminate\Database\Seeder;
 
@@ -23,7 +24,8 @@ class DatabaseSeeder extends Seeder
              'name' => 'othman',
              'email' => 'oth@oth.com',
          ]);
-        Trainee::factory(3)->create();
+        Trainee::factory(10)->create();
+        Program::factory()->create();
 
     }
 }

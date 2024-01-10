@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\ProgramCourses;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,12 @@ class ProgramCourseTitlesFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'title' => $this->faker->sentence,
+            'programCourse_id' => function () {
+                return ProgramCourses::factory()->create()->id;
+            },
+            'hours_count' => $this->faker->numberBetween(1, 100),
+            'requiredLevel' => $this->faker->randomElement(['Beginner', 'Intermediate', 'Advanced']),
         ];
     }
 }

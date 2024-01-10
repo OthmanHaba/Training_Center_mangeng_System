@@ -46,11 +46,20 @@ Route::middleware('auth')->group(function () {
 
     Route::get('programs', [ProgramController::class, 'index'])->name('program.index');
     Route::get('program/create', [ProgramController::class, 'create'])->name('program.create');
+    Route::post('program/store', [ProgramController::class, 'store'])->name('program.store');
+
+    Route::post('api/category/store',[ProgramController::class,'storeCategory'])->name('category.post');
+    Route::delete('api/category/{id}',[ProgramController::class,'deleteCategory'])->name('category.delete');
+
 
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+
+
+
 });
 
 

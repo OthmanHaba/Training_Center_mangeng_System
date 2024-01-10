@@ -116,7 +116,7 @@ export default {
         }
 
         .drawer__content {
-            transform: translateX(0);
+            transform: translateX(0%);
         }
     }
 
