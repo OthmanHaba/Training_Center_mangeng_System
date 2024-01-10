@@ -59,6 +59,11 @@ class ProgramController extends Controller
         return response()->json(['message' => 'Record deleted successfully.']);
     }
 
+    public function getCategories()
+    {
+        $category = Category::all();
+        return response()->json($category);
+    }
     /**
      * Display the specified resource.
      */

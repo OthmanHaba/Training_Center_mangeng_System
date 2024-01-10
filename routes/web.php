@@ -50,6 +50,7 @@ Route::middleware('auth')->group(function () {
 
     Route::post('api/category/store',[ProgramController::class,'storeCategory'])->name('category.post');
     Route::delete('api/category/{id}',[ProgramController::class,'deleteCategory'])->name('category.delete');
+    Route::get('api/categories',[ProgramController::class,'getCategories'])->name('category.get');
 
 
 

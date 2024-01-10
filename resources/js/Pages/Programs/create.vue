@@ -6,12 +6,18 @@ import {ref} from "vue";
 import closeIcon from 'vue-material-design-icons/Close.vue'
 import axios from "axios";
 
+
 const props = defineProps({
     categories: {
         type: Array,
         default: [],
     }
 });
+
+const updatedCategories = ref(props.categories);
+const modalShow = ref(false);
+
+
 const categoryForm = useForm({
     name: '',
 })
@@ -21,7 +27,6 @@ const form = useForm({
     hour_count: '',
     days_count: '',
 });
-const modalShow = ref(false);
 const openCategoryModal = () => {
     console.log(modalShow.value)
     modalShow.value = !modalShow.value;
@@ -30,13 +35,31 @@ const addProgram = () => {
     form.post(route('program.store'))
 };
 const deleteCategory = async (category_id) => {
-    await axios.delete(`/api/category/${category_id}`).then();
+    try {
+        const res = await axios.delete(`/api/category/${category_id}`);
+        if (res.status === 200) {
+            fetchcategories()
+        }
+    } catch (e) {
+        console.log(`server error ${e}`)
+    }
+
 }
+const fetchcategories = async () => {
+    await axios.get(route('category.get')).then(res => {
+        updatedCategories.value = res.data
+        console.log(updatedCategories.value)
+        console.log(props.categories)
+    }).catch(error => {
+        console.error('Error fetching items', error);
+    })
+};
 const addCategories = async () => {
     try {
         const res = await axios.post(route('category.post'), categoryForm.data());
         const newReq = res.data;
-        props.categories.push(newReq);
+        // props.categories.push(newReq);
+        updatedCategories.value.push(newReq)
         categoryForm.name = '';
     } catch (e) {
         console.error('Error submitting form:', e);
@@ -61,6 +84,9 @@ const addCategories = async () => {
                             <input v-model="categoryForm.name" type="text" id="name" class="border p-2 rounded-md">
                             <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md ml-2">إضافة
                             </button>
+                            <!--temp -->
+                            <button type="button" @click.prevent="console.log(props.categories); console.log(updatedCategories.value)" class="bg-blue-500 text-white px-4 py-2 rounded-md ml-2">temp
+                            </button>
                         </div>
                     </form>
 
@@ -73,7 +99,7 @@ const addCategories = async () => {
                         </tr>
                         </thead>
                         <tbody>
-                        <tr v-for="category in categories">
+                        <tr v-for="category in categories" :key="category.id">
                             <td class="border p-2">{{ category.name }}</td>
                             <td class="border p-2 ">
                                 <button @click="deleteCategory(category.id)"
