@@ -6,7 +6,12 @@ const props = defineProps({
     program: {
         type: Array,
         default: []
-    }
+    },
+    courses:{
+        type:Array,
+        default:[],
+    },
+
 })
 
 
@@ -17,7 +22,7 @@ const program = computed(() => props.program);
 
 <template>
     <AuthenticatedLayout>
-        <h1>{{props.program.name}}</h1>
+
     </AuthenticatedLayout>
 </template>
 

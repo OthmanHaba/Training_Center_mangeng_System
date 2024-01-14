@@ -46,9 +46,10 @@ Route::middleware('auth')->group(function () {
 
     Route::get('programs', [ProgramController::class, 'index'])->name('program.index');
     Route::get('program/create', [ProgramController::class, 'create'])->name('program.create');
-    Route::get('program/show/{:id}', [ProgramController::class, 'show'])->name('program.show');
-    Route::get('program/edit/{:id}', [ProgramController::class, 'edit'])->name('program.edit');
-    Route::post('program/update/{:id}', [ProgramController::class, 'update'])->name('program.update');
+    Route::get('program/show/{id}', [ProgramController::class, 'show'])->name('program.show');
+    Route::get('program/edit/{id}', [ProgramController::class, 'edit'])->name('program.edit');
+    Route::put('program/update/{id}', [ProgramController::class, 'update'])->name('program.update');
+    Route::delete('program/delete/{id}', [ProgramController::class, 'destroy'])->name('program.destroy');
 
     Route::post('program/store', [ProgramController::class, 'store'])->name('program.store');
 

@@ -5,17 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Program;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Psy\Util\Json;
 use function Termwind\renderUsing;
 
 class ProgramController extends Controller
 {
-    public function  index()
+    public function index()
     {
         //return Program::with('category')->get();
 
-        return Inertia::render('Programs/Index',[
+        return Inertia::render('Programs/Index', [
             'programs' => Program::with('category')->get(),
         ]);
     }
@@ -24,7 +25,7 @@ class ProgramController extends Controller
     {
         $category = Category::all();
         //return  $category;
-        return Inertia::render('Programs/create',[
+        return Inertia::render('Programs/create', [
             'categories' => $category,
         ]);
     }
@@ -58,7 +59,7 @@ class ProgramController extends Controller
         $category = Category::create([
             'name' => $request->name
         ]);
-        return response()->json($category,201);
+        return response()->json($category, 201);
     }
 
     public function deleteCategory($id)
@@ -66,7 +67,7 @@ class ProgramController extends Controller
 
         $record = Category::find($id);
         if (!$record) {
-            return response()->json(['message' => 'Record not found.'], 404) ;
+            return response()->json(['message' => 'Record not found.'], 404);
         }
         $record->delete();
         $cat = Category::all();
@@ -78,43 +79,50 @@ class ProgramController extends Controller
         $category = Category::all();
         return response()->json($category);
     }
+
     /**
      * Display the specified resource.
      */
-    public function show(Program $program)
+    public function show($program)
     {
         $program = Program::findOrFail($program);
-        return Inertia::render('Programs/show',[
+        return Inertia::render('Programs/show', [
             'program' => $program
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit( $program)
+    public function edit($id)
     {
-          $program = Program::findOrFail($program);
-
-         return Inertia::render('Programs/edit',[
-             'program'=> $program
-
-         ]);
+        //$program = Program::findOrFail($program)->with('category');
+        $id = Program::/*with('category')-> المفروض اندير بالعلاقة لاكن فتتها*/ findOrFail($id);//
+        $categories = Category::all();
+        return Inertia::render('Programs/edit', [
+            'program' => $id,
+            'categories' => $categories,
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Program $program)
+    public function update(Request $request, $id)//, Program $program
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'category_id' => 'required',
+            'hour_count' => 'required',
+            'days_count' => 'required',
+        ]);
+        $program = Program::findOrFail($id);
+        $program->update([
+            'name' => $request->name,
+            'category_id' => $request->category_id,
+            'hour_count' => $request->hour_count,
+            'days_count' => $request->days_count,
+        ]);
+        return Redirect::route('program.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Program $program)
+    public function destroy($id)
     {
-        //
+         $program =  Program::findOrFail($id);
+         $program->delete();
     }
 }

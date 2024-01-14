@@ -20,22 +20,23 @@ const props = defineProps({
 const updatedCategories = computed(() => props.categories )
 // const updatedCategories =  ref(props.categories);
 const modalShow = ref(false);
+const program = computed(() => props.program)
 
 const categoryForm = useForm({
     name: '',
 })
 const form = useForm({
-    name: '',
-    category_id: 0,
-    hour_count: '',
-    days_count: '',
+    name: program.value.name ,
+    category_id:  program.value.category_id,
+    hour_count: program.value.hour_count,
+    days_count: program.value.days_count,
 });
 const openCategoryModal = () => {
     console.log(modalShow.value)
     modalShow.value = !modalShow.value;
 };
 const addProgram = () => {
-    form.post(route('program.update'))
+    form.put(route('program.update',program.value.id))
 };
 const deleteCategory = async (category_id) => {
     await axios.delete(`/api/category/${category_id}`)
@@ -155,7 +156,7 @@ const addCategories = async () => {
                            class="mt-1 p-2 w-full border rounded-md">
                 </div>
 
-                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md">إضافة البرنامج</button>
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md">تعديل</button>
             </form>
         </div>
     </AuthenticatedLayout>
