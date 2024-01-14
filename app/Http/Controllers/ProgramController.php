@@ -13,7 +13,8 @@ class ProgramController extends Controller
 {
     public function  index()
     {
-        //return Program::with('category:name')->get();
+        //return Program::with('category')->get();
+
         return Inertia::render('Programs/Index',[
             'programs' => Program::with('category')->get(),
         ]);
@@ -33,7 +34,20 @@ class ProgramController extends Controller
      */
     public function store(Request $request)
     {
-        return $request;
+        $request->validate([
+            'name' => 'required',
+            'hour_count' => 'required',
+            'days_count' => 'required',
+            'category_id' => 'required',
+        ]);
+        Program::create([
+            'name' => $request->name,
+            'hour_count' => $request->hour_count,
+            'days_count' => $request->days_count,
+            'category_id' => $request->category_id,
+        ]);
+
+        return back()->with(['success' => 'the program has been inserted successfully']);
     }
 
     public function storeCategory(Request $request)
@@ -49,14 +63,14 @@ class ProgramController extends Controller
 
     public function deleteCategory($id)
     {
+
         $record = Category::find($id);
         if (!$record) {
             return response()->json(['message' => 'Record not found.'], 404) ;
         }
-
         $record->delete();
-
-        return response()->json(['message' => 'Record deleted successfully.']);
+        $cat = Category::all();
+        return response()->json($cat);
     }
 
     public function getCategories()
@@ -69,15 +83,23 @@ class ProgramController extends Controller
      */
     public function show(Program $program)
     {
-        //
+        $program = Program::findOrFail($program);
+        return Inertia::render('Programs/show',[
+            'program' => $program
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Program $program)
+    public function edit( $program)
     {
-        //
+          $program = Program::findOrFail($program);
+
+         return Inertia::render('Programs/edit',[
+             'program'=> $program
+
+         ]);
     }
 
     /**

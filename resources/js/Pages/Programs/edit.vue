@@ -11,6 +11,10 @@ const props = defineProps({
     categories: {
         type: Array,
         default: [],
+    },
+    program:{
+        type:Array,
+        default:[]
     }
 });
 const updatedCategories = computed(() => props.categories )
@@ -31,7 +35,7 @@ const openCategoryModal = () => {
     modalShow.value = !modalShow.value;
 };
 const addProgram = () => {
-    form.post(route('program.store'))
+    form.post(route('program.update'))
 };
 const deleteCategory = async (category_id) => {
     await axios.delete(`/api/category/${category_id}`)

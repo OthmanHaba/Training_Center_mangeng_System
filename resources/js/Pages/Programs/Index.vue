@@ -36,7 +36,8 @@ const closeDrawer = () => {
                 <!-- Note: البرامج التدريبية -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
                     <div v-for="(program, index) in programs" :key="index"
-                         :to="{ name: 'program', params: { id: program.id }}">
+                         >
+<!--                        :to="{ name: 'program', params: { id: program.id }}"-->
                         <div
                             class="bg-white p-6 mb-8  border border-gray-300 rounded-md transition duration-300 transform hover:shadow-lg">
                             <!-- Note: اسم البرنامج -->
@@ -44,7 +45,7 @@ const closeDrawer = () => {
                             <!-- Note: اسم التصنيف -->
                             <div class="flex gap-3">
                                 <strong>تصنيف البرنامج</strong>
-                                <p class="text-gray-600 mb-4">{{ program.category.name }}</p>
+                                <p class="text-gray-600 mb-4">{{ program.category ? program.category.name :''}}</p>
                             </div>
                             <div class="flex items-center justify-between">
                                 <div>
@@ -59,13 +60,13 @@ const closeDrawer = () => {
                                     }}</span>
                             </div>
                             <div class="flex gap-3">
-                                <Link>
+                                <Link :href="route('program.show',program.id)">
                                     <div
                                         class="p-2 text-white bg-blue-300 rounded-xl border-sm text-center hover:bg-blue-600">
                                         عرض
                                     </div>
                                 </Link>
-                                <Link>
+                                <Link :href="route('program.edit',program.id)">
                                     <div
                                         class="p-2 text-white bg-blue-300 rounded-xl border-sm text-center hover:bg-blue-600">
                                         تعديل

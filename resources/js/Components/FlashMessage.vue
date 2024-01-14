@@ -1,6 +1,6 @@
 <template>
     <transition name="fade" mode="out-in">
-        <div v-if="show"  class="fixed top-16 right-2 animate-slide-in">
+        <div dir="rtl" v-if="show"  class="fixed top-16 right-2 animate-slide-in">
             <div class="bg-green-500 text-white px-4 py-3 rounded-lg shadow-md">
                 <div class="flex items-center">
                     <div class="w-6 h-6 mr-4">
@@ -9,8 +9,7 @@
                         </svg>
                     </div>
                     <div>
-                        <p class="font-bold">Success!</p>
-                        <p class="text-sm">Your action was completed successfully.</p>
+                        <p class="font-bold">{{$page.props.flash.success}}!</p>
                     </div>
                 </div>
             </div>
@@ -50,16 +49,30 @@ export default {
 </script>
 
 <style>
-.animate-slide-in {
-    animation: slideIn 0.3s ease-out;
+.animate-bob-up {
+    animation: bobUp 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards, fadeOut 0.5s ease-in-out 2s forwards;
 }
 
-@keyframes slideIn {
+@keyframes bobUp {
     0% {
-        transform: translateX(100%);
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    60% {
+        transform: translateY(-30%);
+        opacity: 1;
     }
     100% {
-        transform: translateX(0);
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
     }
 }
 
@@ -73,3 +86,4 @@ export default {
     opacity: 0;
 }
 </style>
+

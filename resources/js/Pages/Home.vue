@@ -1,16 +1,16 @@
 <script>
-import Layout from "../Shared/Layout.vue";
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 
 export default {
     name: "Home.vue",
-    components: {Layout}
+    components: {AuthenticatedLayout}
 }
 </script>
 
 <template>
-    <layout>
+    <AuthenticatedLayout>
 
-    </layout>
+    </AuthenticatedLayout>
 </template>
 
 <style scoped>
